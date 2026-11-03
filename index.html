@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="XYZ座標から分子を3Dで表示。タブレットやPCで、分子の形を回転・拡大して観察できる教育用Webサイトです。">
+  <meta name="theme-color" content="#0e2036">
+  <title>分子の世界をのぞいてみよう | Molecule Explorer</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/3Dmol/2.5.5/3Dmol-min.js"></script>
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#viewer-section">分子ビューアへ移動</a>
+  <header class="site-header">
+    <div class="container topbar">
+      <a class="brand" href="#top" aria-label="Molecule Explorer トップへ">
+        <span class="brand-symbol" aria-hidden="true">
+          <svg width="25" height="25" viewBox="0 0 28 28" fill="none"><ellipse cx="14" cy="14" rx="12" ry="5.1" transform="rotate(42 14 14)" stroke="currentColor" stroke-width="1.5"/><ellipse cx="14" cy="14" rx="12" ry="5.1" transform="rotate(-42 14 14)" stroke="currentColor" stroke-width="1.5"/><circle cx="14" cy="14" r="2.6" fill="currentColor"/></svg>
+        </span>
+        <span class="brand-text">MOLECULE <span>EXPLORER</span></span>
+      </a>
+      <nav class="main-nav" aria-label="サイト内ナビゲーション">
+        <a href="#viewer-section">分子を観察</a>
+        <a href="#guide">使い方</a>
+        <a href="#about">このサイトについて</a>
+      </nav>
+      <a class="top-cta" href="#viewer-section">観察をはじめる <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero container" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-line"></span> INTERACTIVE MOLECULE LAB</div>
+        <h1 id="hero-title">目に見えない世界を、<br><em>指先で。</em></h1>
+        <p>水も、空気も、私たちの体も。すべては小さな粒子からできています。分子を回して、近づいて、その「かたち」を発見してみましょう。</p>
+        <div class="hero-facts" aria-label="このサイトでできること">
+          <span><span class="fact-dot" aria-hidden="true"></span> タッチで3D操作</span>
+          <span><span class="fact-dot" aria-hidden="true"></span> XYZファイル対応</span>
+          <span><span class="fact-dot" aria-hidden="true"></span> インストール不要</span>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="orbit orbit-c"></div>
+        <div class="hero-core"></div><div class="orbit-particle particle-a"></div><div class="orbit-particle particle-b"></div><div class="orbit-particle particle-c"></div>
+        <span class="hero-art-label top-label">H₂O <span>／</span> 104.5°</span>
+        <span class="hero-art-label bottom-label">THE WORLD OF MOLECULES</span>
+      </div>
+    </section>
+
+    <section id="viewer-section" class="studio container" aria-labelledby="studio-title">
+      <div class="section-title-row">
+        <div>
+          <div class="section-kicker">01 / EXPLORE</div>
+          <h2 id="studio-title">分子を観察する</h2>
+          <p>分子を選ぶか、自分のXYZファイルを読み込んでください。GitHubの molecules フォルダに追加した分子も自動で表示されます。</p>
+        </div>
+        <span class="studio-indicator"><span class="status-dot"></span> INTERACTIVE 3D</span>
+      </div>
+
+      <div class="studio-layout">
+        <aside class="molecule-panel" aria-labelledby="molecule-list-title">
+          <div class="panel-heading">
+            <div><span class="panel-kicker">LIBRARY</span><h3 id="molecule-list-title">分子をえらぶ</h3></div>
+            <span class="panel-count" id="sample-count">06</span>
+          </div>
+          <div class="sample-list" role="group" aria-label="サンプル分子">
+            <button class="sample-card is-active" type="button" data-sample="water" aria-pressed="true">
+              <span class="sample-icon sample-water"><span class="molecule-dots">●<i>●</i><b>●</b></span></span>
+              <span class="sample-copy"><strong>水</strong><small>H₂O · 折れ線形</small></span><span class="sample-arrow" aria-hidden="true">↗</span>
+            </button>
+            <button class="sample-card" type="button" data-sample="methane" aria-pressed="false">
+              <span class="sample-icon sample-methane">CH₄</span><span class="sample-copy"><strong>メタン</strong><small>CH₄ · 正四面体形</small></span><span class="sample-arrow" aria-hidden="true">↗</span>
+            </button>
+            <button class="sample-card" type="button" data-sample="co2" aria-pressed="false">
+              <span class="sample-icon sample-co2">CO₂</span><span class="sample-copy"><strong>二酸化炭素</strong><small>CO₂ · 直線形</small></span><span class="sample-arrow" aria-hidden="true">↗</span>
+            </button>
+            <button class="sample-card" type="button" data-sample="ammonia" aria-pressed="false">
+              <span class="sample-icon sample-ammonia">NH₃</span><span class="sample-copy"><strong>アンモニア</strong><small>NH₃ · 三角錐形</small></span><span class="sample-arrow" aria-hidden="true">↗</span>
+            </button>
+            <button class="sample-card" type="button" data-sample="benzene" aria-pressed="false">
+              <span class="sample-icon sample-benzene">C₆</span><span class="sample-copy"><strong>ベンゼン</strong><small>C₆H₆ · 平面構造</small></span><span class="sample-arrow" aria-hidden="true">↗</span>
+            </button>
+            <button class="sample-card" type="button" data-sample="ethanol" aria-pressed="false">
+              <span class="sample-icon sample-ethanol">EtOH</span><span class="sample-copy"><strong>エタノール</strong><small>C₂H₆O · 有機分子</small></span><span class="sample-arrow" aria-hidden="true">↗</span>
+            </button>
+          </div>
+          <div class="public-library" aria-labelledby="uploaded-heading">
+            <div class="public-library-heading">
+              <h4 id="uploaded-heading">GitHubに登録した分子</h4>
+              <button type="button" id="reload-library" class="library-reload" title="登録分子の一覧を更新">↻ 更新</button>
+            </div>
+            <p class="library-message" id="library-message" role="status" aria-live="polite">登録された分子を確認しています…</p>
+            <div class="sample-list" id="uploaded-list" role="group" aria-label="GitHubから読み込む分子"></div>
+          </div>
+          <div class="upload-area" id="upload-area">
+            <div class="upload-area-icon" aria-hidden="true">↥</div>
+            <strong>自分の分子を表示</strong>
+            <span>XYZファイルを選択、またはここにドロップ</span>
+            <label for="xyz-file" class="upload-button">XYZファイルを選ぶ</label>
+            <input id="xyz-file" class="visually-hidden" type="file" accept=".xyz,text/plain" aria-label="XYZファイルを読み込む">
+          </div>
+        </aside>
+
+        <div class="viewer-column">
+          <div class="viewer-card">
+            <div class="viewer-card-header">
+              <div><span class="viewer-sublabel">MOLECULAR VIEWPORT</span><h3 id="molecule-name">水 <span>H₂O</span></h3></div>
+              <div class="viewer-header-actions"><span class="webgl-mark"><span></span> WEBGL</span><button type="button" id="reset-view" class="icon-action" title="向きと拡大率をリセット" aria-label="視点をリセット">⤾</button></div>
+            </div>
+            <div id="viewer-stage" class="viewer-stage" aria-label="分子の3D表示領域。マウスまたは指で回転や拡大ができます">
+              <div class="stage-grid" aria-hidden="true"></div>
+              <div id="molecule-viewer" class="molecule-viewer"></div>
+              <div class="stage-topleft" aria-hidden="true"><span class="live-dot"></span> 3D MOLECULE</div>
+              <div class="stage-crosshair" aria-hidden="true">+</div>
+              <div class="stage-fallback" id="stage-fallback" hidden role="alert"><strong>3D表示を読み込めませんでした</strong><span>インターネット接続とWebGL対応ブラウザをご確認ください。</span></div>
+              <div class="stage-tip" id="stage-tip">↻ ドラッグで回転　・　ピンチで拡大</div>
+            </div>
+            <div class="view-controls">
+              <div class="control-group" role="group" aria-label="分子の表示形式">
+                <button type="button" class="mode-button is-active" data-style="ballstick" aria-pressed="true">球棒モデル</button>
+                <button type="button" class="mode-button" data-style="stick" aria-pressed="false">棒モデル</button>
+                <button type="button" class="mode-button" data-style="sphere" aria-pressed="false">空間充填</button>
+              </div>
+              <div class="control-group right-controls">
+                <button type="button" class="toggle-button" id="labels-button" aria-pressed="false"><span aria-hidden="true">Aa</span> 元素名</button>
+                <button type="button" class="toggle-button" id="spin-button" aria-pressed="false"><span aria-hidden="true">↻</span> 自動回転</button>
+              </div>
+            </div>
+            <div class="trajectory-controls" id="trajectory-controls" hidden>
+              <button type="button" class="play-button" id="play-frames" aria-label="構造の連続再生">▶</button>
+              <div class="trajectory-scrub"><div class="trajectory-row"><strong>構造フレーム</strong><span id="frame-info">1 / 1</span></div><input type="range" id="frame-slider" min="0" max="0" value="0" aria-label="構造フレームを選択"></div>
+            </div>
+          </div>
+
+          <div class="molecule-info">
+            <div class="info-title"><span class="panel-kicker">MOLECULE NOTES</span><h3 id="info-title">なぜ水分子は曲がっているの？</h3></div>
+            <p id="info-description">水分子は、酸素原子1つと水素原子2つからできています。3つの原子は一直線には並ばず、約104.5°の角度で折れ曲がっています。</p>
+            <div class="fact-grid">
+              <div><span class="fact-label">化学式</span><strong id="formula-value">H₂O</strong></div>
+              <div><span class="fact-label">原子数</span><strong id="atom-count">3</strong></div>
+              <div><span class="fact-label">形・分類</span><strong id="geometry-value">折れ線形</strong></div>
+            </div>
+            <div class="atom-inspector" id="atom-inspector" aria-live="polite"><span class="inspector-dot" aria-hidden="true"></span><span id="atom-inspector-text">3Dモデルの原子をタップすると、元素と座標が表示されます。</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="site-alert" id="status-message" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="guide-section" id="guide">
+      <div class="container guide-inner">
+        <div class="section-kicker">02 / HOW TO USE</div><h2>観察は、かんたん3ステップ。</h2>
+        <div class="steps">
+          <article class="step"><span class="step-number">01</span><div class="step-icon">☝</div><h3>分子をえらぶ</h3><p>左の一覧から分子を選択。自分のXYZファイルも読み込めます。</p></article>
+          <article class="step"><span class="step-number">02</span><div class="step-icon">⟲</div><h3>回して、近づく</h3><p>指でドラッグして回転。2本指のピンチで拡大・縮小できます。</p></article>
+          <article class="step"><span class="step-number">03</span><div class="step-icon">⌁</div><h3>形を比べて考える</h3><p>表示形式を切り替え、原子の並び方や分子の立体的な特徴を観察しましょう。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about-section container">
+      <div class="about-icon" aria-hidden="true">✳</div><div><div class="section-kicker">ABOUT THIS PROJECT</div><h2>科学を、もっと手に取れるものに。</h2><p>このサイトは、目で見ることが難しい分子の構造を、ブラウザの中で自由に観察するための学習教材です。PC・iPad・タブレットから利用できます。表示には3Dmol.jsを使用しています。</p><small>注：分子構造は教材用の例です。XYZファイルの原子間結合は、距離などから自動推定されます。自動推定された結合は化学的に確定した情報ではありません。</small></div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><span>MOLECULE EXPLORER <span class="footer-star">✳</span> 3D分子観察室</span><span>See the invisible. Discover the structure.</span></div></footer>
+</body>
+</html>
